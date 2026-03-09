@@ -25,11 +25,8 @@ struct PasswordStrengthView: View {
             .frame(height: 3)
             .background(Color.black)
  
-        
-        Text("Password: Good")
-            .fontWeight(.bold)
-            .font(.title3)
-            .padding()
+        EvalBar()
+        .padding()
         
         Divider()
             .frame(height: 3)

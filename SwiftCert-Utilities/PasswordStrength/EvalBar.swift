@@ -17,17 +17,18 @@ struct EvalBar: View {
     var body: some View {
         VStack {
           
-        Text("Password")
+        Text("Your Password Is")
+            .font(.title3)
           
-        TextField("Password", text: $password)
+          Text(progressText)
+            .font(.headline)
           
         ProgressView(value: progress)
             .progressViewStyle(.linear)
             .tint(progressColor)
             .padding()
           
-          Text(progressText)
-            .font(.headline)
+         
           
           Button("Increase Progress") {
             progress += 0.1
@@ -36,7 +37,7 @@ struct EvalBar: View {
     }
   
   var progressColor: Color {
-    if progress > 1 {
+    if progress > 0.9 {
       return .green
     } else if progress < 0.3 {
       return .red
@@ -48,7 +49,7 @@ struct EvalBar: View {
   }
   
   var progressText: String {
-    if progress > 1 {
+    if progress > 0.9 {
       return "Excellent"
     } else if progress < 0.3 {
       return "Bad"
