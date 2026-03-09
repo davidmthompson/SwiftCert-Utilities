@@ -4,64 +4,42 @@
 //
 //  Created by Student on 3/9/26.
 //
-
 import SwiftUI
 
-
-
 struct EvalBar: View {
-  
-  @State private var password: String = ""
-  @State private var progress: Double = 0.1
-  
+    @Binding var password: String
+    
+    var progress: Double {
+        min(Double(password.count) * 0.1, 1.0)
+    }
+    
     var body: some View {
         VStack {
-          
-        Text("Your Password Is")
-            .font(.title3)
-          
-          Text(progressText)
-            .font(.headline)
-          
-        ProgressView(value: progress)
-            .progressViewStyle(.linear)
-            .tint(progressColor)
-            .padding()
-          
-         
-          
-          Button("Increase Progress") {
-            progress += 0.1
-          }
-      }
+            Text("Your Password Is")
+                .font(.title3)
+            
+            Text(progressText)
+                .font(.headline)
+                .foregroundColor(progressColor)
+            
+            ProgressView(value: progress)
+                .progressViewStyle(.linear)
+                .tint(progressColor)
+                .padding()
+        }
     }
-  
-  var progressColor: Color {
-    if progress > 0.9 {
-      return .green
-    } else if progress < 0.3 {
-      return .red
-    } else if progress < 0.3{
-      return .orange
-    } else {
-      return .yellow
+    
+    var progressColor: Color {
+        if progress > 0.8 { return .green }
+        if progress > 0.5 { return .yellow }
+        if progress > 0.2 { return .orange }
+        return .red
     }
-  }
-  
-  var progressText: String {
-    if progress > 0.9 {
-      return "Excellent"
-    } else if progress < 0.3 {
-      return "Bad"
-    } else if progress < 0.5{
-      return "Okay"
-    } else {
-      return "Strong"
+    
+    var progressText: String {
+        if progress > 0.8 { return "Excellent" }
+        if progress > 0.5 { return "Strong" }
+        if progress > 0.2 { return "Okay" }
+        return "Bad"
     }
-  }
-  
-}
-
-#Preview {
-    EvalBar()
 }
